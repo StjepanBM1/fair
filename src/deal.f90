@@ -13,10 +13,10 @@
 !   8
 !   9
 !   10
-!   11  --> "Jack"
-!   12  --> "Queen"
-!   13  --> "King"
-!   14  --> "Ace"
+!   11
+!   12
+!   13
+!   14
 !
 
 module deal
@@ -28,6 +28,22 @@ contains
         call random_number(x)
         x = x * 10
         
+        if ( x > 14 ) then
+            x = x - 10
+        end if
+
+        card = x
+
+    end function
+
+    function deal_card_hard(in_c) result(card)
+        real :: x
+        integer :: in_c
+
+        call random_number(x)
+        x = x * 10
+        x = x + 1
+
         if ( x > 14 ) then
             x = x - 10
         end if

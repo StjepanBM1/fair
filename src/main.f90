@@ -1,61 +1,43 @@
 
 program main
-
-    use :: deal
-    use :: ai
+    use :: easy
+    use :: hard
     use, intrinsic :: ISO_Fortran_env
     
     implicit none
     
     ! Variables
-    integer :: i, x, y, z
-    integer :: player_card, ai_card
-    integer :: player_bet, ai_bet
-    integer :: player_bank, ai_bank
-    
-    ! Deal the cards
-    player_card = deal_c()
-    ai_card = deal_c()
-
-    ! Start amount of cash
-    player_bank = 100
-    ai_bank = 10
-
-    ! Get the (AI) bet
-    ai_bet = ai_gen_bet()
+    integer :: diff, i, game
 
     ! Banner
-    print *, "Fair (the card game) v1.01 | Ctrl-C to exit"
+    print *, "Fair (the card game) v2.00 | Ctrl-C to exit"
     do i = 1, 22
         write (*, fmt="(1x,a,i0)", advance="no") "-"
     end do
     print *, ""
 
-    ! User input (bet)
-    write (*, fmt="(1x,a,i0)", advance="yes") "Your bank: ", player_bank
-    write (*, fmt="(1x,a,i0)", advance="yes") "Your card: ", player_card
-    write (*, fmt="(1x,a,i0)", advance="no") "Your bet:  "
-    read *, player_bet
+    print *, "  Choose the difficulty  :"
+    print *, " 1 - Easy"
+    print *, " 2 - Hard (impossible)"
 
-    if ( player_card > ai_card ) then
+    write (*, fmt="(1x,a,i0)", advance="no") "?  "
+    read *, diff
+
+    if ( diff == 1 ) then
+        game = easy_game()
+    else if ( diff == 2 ) then
+        game = hard_game()
+    else
+        write (*, fmt="(1x,a,i0)", advance="yes") "Enter 1 or 2"
+    end if
+
+
+    if ( game == 1 ) then
         print *, "* * * YOU WON * * *"
-        player_bank = player_bank + ai_bet
-        write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_card
-        write (*, fmt="(1x,a,i0)", advance="yes") "Your bank: ", player_bank
-    end if
-
-    if ( player_card < ai_card ) then
+    else if ( game == 2 ) then
         print *, "* * * YOU LOST * * *"
-        ai_bank = ai_bank + player_bet
-        player_bank = player_bank - player_bet
-        write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_card
-        write (*, fmt="(1x,a,i0)", advance="yes") "Your bank: ", player_bank
-    end if
-
-    if ( player_card == ai_card ) then
-        print *, "TIE"
-        write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_card
-        write (*, fmt="(1x,a,i0)", advance="yes") "Your bank: ", player_bank
+    else if ( game == 0 ) then
+        print *, "* * * TIE * * *"
     end if
 
 end program main
