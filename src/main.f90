@@ -10,7 +10,7 @@ program main
     integer :: diff, i, game
 
     ! Banner
-    print *, "Fair (the card game) v2.00 | Ctrl-C to exit"
+    print *, "Fair (the card game) v3.00 | Ctrl-C to exit"
     do i = 1, 22
         write (*, fmt="(1x,a,i0)", advance="no") "-"
     end do

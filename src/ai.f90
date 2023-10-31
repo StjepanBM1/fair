@@ -7,14 +7,12 @@ contains
         real :: x
 
         call random_number(x)
-
+        x = x*10
         
-        x = x + 10
-        
-        if ( x >= ai_bank ) then
-            x = ai_bank
+        if ( x > ai_bank-1 ) then
+            x = ai_bank-1
         end if
-        
+
         bet = x
 
     end function

@@ -27,24 +27,24 @@ module easy
 
         ! Check card value
         if ( player_card > ai_card ) then
-            write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_bet
-            write (*, fmt="(1x,a,i0)", advance="yes") "AI bet: ", ai_bank
+            write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_card
+            write (*, fmt="(1x,a,i0)", advance="yes") "AI bet: ", ai_bet
 
             player_bank = player_bank + ai_bet
             write (*, fmt="(1x,a,i0)", advance="yes") "Your bank: ", player_bank
             winner = 1
 
         else if ( player_card < ai_card ) then
-            write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_bet
-            write (*, fmt="(1x,a,i0)", advance="yes") "AI bet: ", ai_bank
+            write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_card
+            write (*, fmt="(1x,a,i0)", advance="yes") "AI bet: ", ai_bet
 
-            player_bank = player_bank - ai_bet
+            player_bank = player_bank - (ai_bet + player_bet)
             write (*, fmt="(1x,a,i0)", advance="yes") "Your bank: ", player_bank
             winner = 2
 
         else
-            write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_bet
-            write (*, fmt="(1x,a,i0)", advance="yes") "AI bet: ", ai_bank
+            write (*, fmt="(1x,a,i0)", advance="yes") "AI card: ", ai_card
+            write (*, fmt="(1x,a,i0)", advance="yes") "AI bet: ", ai_bet
             write (*, fmt="(1x,a,i0)", advance="yes") "Your bank: ", player_bank
             winner = 0
 
